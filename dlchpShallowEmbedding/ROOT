@@ -1,0 +1,4 @@
+session "dlCHP_Toolkit" in "dlCHP_Toolkit" = "Hybrid-Verification" +
+  options [document = false]
+  sessions "UTP-Reactive"
+  theories dlCHP_Toolkit
