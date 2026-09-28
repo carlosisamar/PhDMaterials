@@ -16,3 +16,6 @@
 [submodule "libraries/Z_Toolkit"]
 	path = libraries/Z_Toolkit
 	url = https://github.com/isabelle-utp/Z_Toolkit.git
+[submodule "libraries/UTP-Reactive"]
+	path = libraries/UTP-Reactive
+	url = https://github.com/isabelle-utp/UTP-Reactive.git
