@@ -7,3 +7,6 @@
 [submodule "libraries/Hybrid-Library"]
 	path = libraries/Hybrid-Library
 	url = https://github.com/isabelle-utp/Hybrid-Library.git
+[submodule "libraries/Shallow-Expressions"]
+	path = libraries/Shallow-Expressions
+	url = https://github.com/isabelle-utp/Shallow-Expressions.git
