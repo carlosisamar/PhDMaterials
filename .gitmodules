@@ -13,3 +13,6 @@
 [submodule "libraries/CAS-Integration"]
 	path = libraries/CAS-Integration
 	url = https://github.com/isabelle-utp/CAS-Integration.git
+[submodule "libraries/Z_Toolkit"]
+	path = libraries/Z_Toolkit
+	url = https://github.com/isabelle-utp/Z_Toolkit.git
