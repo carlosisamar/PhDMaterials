@@ -1,3 +1,6 @@
 [submodule "libraries/Optics"]
 	path = libraries/Optics
 	url = https://github.com/isabelle-utp/Optics.git
+[submodule "libraries/Hybrid-Verification"]
+	path = libraries/Hybrid-Verification
+	url = https://github.com/isabelle-utp/Hybrid-Verification.git
