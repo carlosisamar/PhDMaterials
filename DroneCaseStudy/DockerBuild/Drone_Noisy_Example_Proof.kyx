@@ -1,0 +1,82 @@
+﻿ArchiveEntry "Drone Noisy Example"
+Definitions
+    Real period;
+    Real xMax;
+    Real yMax;
+    Real zMax;
+    Real xMin;
+    Real yMin;
+    Real zMin;
+    
+    Real ex;
+    Real ey;
+    Real ez;
+    Real exVel;
+    Real eyVel;
+    Real ezVel;
+    
+    HP flight ::=  {t:=0;{x'=xVel,y'=yVel,z'=zVel,t'=1 &t<=period};};
+    
+    HP nsen ::= {compx := *; compy := *; compz := *; ?(x - compx <= ex); ?(x - compx >= -ex); ?(y - compy <= ey); ?(y - compy >= -ey); ?(z - compz <= ez);?(z - compz >= -ez);};
+    
+    HP nact ::= {xVel := *; yVel := *; zVel := *; ?(xVel - compxVel <= exVel); ?(xVel - compxVel >= -exVel); ?(yVel - compyVel <= eyVel); ?(yVel - compyVel >= -eyVel);?(zVel - compzVel <= ezVel);?(zVel - compzVel >= -ezVel);};
+
+    HP controller ::= {compxVel :=*;compyVel:=*;compzVel:=*;?compx+compxVel*period-xMax +ex +period*exVel<=0;?-compx-compxVel*period-xMin+ex +period*exVel<=0;?compy+compyVel*period-yMax+ey +period*eyVel<=0;?-compy-compyVel*period-yMin+ey +period*eyVel<=0;?compz+compzVel*period-zMax+ez +period*ezVel<=0;?-compz-compzVel*period-zMin+ez +period*ezVel<=0;};
+End.
+
+ProgramVariables
+    Real xVel;
+    Real compxVel;
+    Real x;
+    Real compx;
+    
+    Real yVel;
+    Real compyVel;
+    Real y;
+    Real compy;
+    
+    Real zVel;
+    Real compzVel;
+    Real z;
+    Real compz;
+    
+    Real t;
+End.
+
+Problem
+  (period>0 & xMax>0 & xMin<0 & yMax>0 & yMin<0 & zMax>0 & zMin<0 & x<=xMax & x>=xMin & y<=yMax & y>=yMin & z<=zMax & z>=zMin
+  & ex >= 0 &exVel>=0 & ey >= 0 &eyVel>=0& ez >= 0 &ezVel>=0)->
+    [{nsen;controller;nact;flight;}*](x<=xMax & x>=xMin & y<=yMax & y>=yMin & z<=zMax & z>=zMin)
+End.
+
+Tactic
+unfold;
+loop("x<=xMax()&x>=xMin()&y<=yMax()&y>=yMin()&z<=zMax()&z>=zMin()", 'R=="[{nsen{|^@|};controller{|^@|};nact{|^@|};flight{|^@|};}*](x<=xMax()&x>=xMin()&y<=yMax()&y>=yMin()&z<=zMax()&z>=zMin())"); <(
+  "Init":
+    auto,
+  "Post":
+    auto,
+  "Step":
+    expandAllDefs();
+    unfold;
+    dC("x<=xMax()&x>=xMin()", 'R=="[{x'=xVel,y'=yVel,z'=zVel,t'=1&t<=period()}](x<=xMax()&x>=xMin()&y<=yMax()&y>=yMin()&z<=zMax()&z>=zMin())"); <(
+      "Use":
+        dC("y<=yMax()&y>=yMin()", 'R=="[{x'=xVel,y'=yVel,z'=zVel,t'=1&t<=period()&x<=xMax()&x>=xMin()}](x<=xMax()&x>=xMin()&y<=yMax()&y>=yMin()&z<=zMax()&z>=zMin())"); <(
+          "Use":
+            dC("z<=zMax()&z>=zMin()", 'R=="[{x'=xVel,y'=yVel,z'=zVel,t'=1&(t<=period()&x<=xMax()&x>=xMin())&y<=yMax()&y>=yMin()}](x<=xMax()&x>=xMin()&y<=yMax()&y>=yMin()&z<=zMax()&z>=zMin())"); <(
+              "Use":
+                dW('R=="[{x'=xVel,y'=yVel,z'=zVel,t'=1&((t<=period()&x<=xMax()&x>=xMin())&y<=yMax()&y>=yMin())&z<=zMax()&z>=zMin()}](x<=xMax()&x>=xMin()&y<=yMax()&y>=yMin()&z<=zMax()&z>=zMin())");
+                auto,
+              "Show":
+                auto using "period()>0 :: xMax()>0 :: xMin() < 0 :: yMax()>0 :: yMin() < 0 :: zMax()>0 :: zMin() < 0 :: ex()>=0 :: exVel()>=0 :: ey()>=0 :: eyVel()>=0 :: ez()>=0 :: ezVel()>=0 :: z-compz<=ez() :: z-compz>=-ez() :: compz+compzVel*period()-zMax()+ez()+period()*ezVel()<=0 :: -compz-compzVel*period()-zMin()+ez()+period()*ezVel()<=0 :: zVel-compzVel<=ezVel() :: zVel-compzVel>=-ezVel() :: t=0 :: x<=xMax() :: x>=xMin() :: y<=yMax() :: y>=yMin() :: z<=zMax() :: z>=zMin() :: [{x'=xVel,y'=yVel,z'=zVel,t'=1&(t<=period()&x<=xMax()&x>=xMin())&y<=yMax()&y>=yMin()}](z<=zMax()&z>=zMin()) :: nil"
+            ),
+          "Show":
+            auto using "period()>0 :: xMax()>0 :: xMin() < 0 :: yMax()>0 :: yMin() < 0 :: zMax()>0 :: zMin() < 0 :: ex()>=0 :: exVel()>=0 :: ey()>=0 :: eyVel()>=0 :: ez()>=0 :: ezVel()>=0 :: y-compy<=ey() :: y-compy>=-ey() :: compy+compyVel*period()-yMax()+ey()+period()*eyVel()<=0 :: -compy-compyVel*period()-yMin()+ey()+period()*eyVel()<=0 :: yVel-compyVel<=eyVel() :: yVel-compyVel>=-eyVel() :: t=0 :: x<=xMax() :: x>=xMin() :: y<=yMax() :: y>=yMin() :: z<=zMax() :: z>=zMin() :: [{x'=xVel,y'=yVel,z'=zVel,t'=1&t<=period()&x<=xMax()&x>=xMin()}](y<=yMax()&y>=yMin()) :: nil"
+        ),
+      "Show":
+        auto using "period()>0 :: xMax()>0 :: xMin() < 0 :: yMax()>0 :: yMin() < 0 :: zMax()>0 :: zMin() < 0 :: ex()>=0 :: exVel()>=0 :: ey()>=0 :: eyVel()>=0 :: ez()>=0 :: ezVel()>=0 :: x-compx<=ex() :: x-compx>=-ex() :: compx+compxVel*period()-xMax()+ex()+period()*exVel()<=0 :: -compx-compxVel*period()-xMin()+ex()+period()*exVel()<=0 :: xVel-compxVel<=exVel() :: xVel-compxVel>=-exVel() :: t=0 :: x<=xMax() :: x>=xMin() :: y<=yMax() :: y>=yMin() :: z<=zMax() :: z>=zMin() :: [{x'=xVel,y'=yVel,z'=zVel,t'=1&t<=period()}](x<=xMax()&x>=xMin()) :: nil"
+    )
+)
+End.
+End.
+/* End printed tactics */

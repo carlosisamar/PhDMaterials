@@ -1,0 +1,75 @@
+﻿ArchiveEntry "Drone Example"
+Definitions
+    Real period;
+    Real xMax;
+    Real yMax;
+    Real zMax;
+    Real xMin;
+    Real yMin;
+    Real zMin;
+    
+    HP flight ::=  {t:=0;{x'=xVel,y'=yVel,z'=zVel,t'=1 &t<=period};};
+    
+    HP sen ::= {compx := x; compy := y; compz := z;};
+    
+    HP act ::= {xVel := compxVel; yVel := compyVel; zVel := compzVel;};
+
+    HP controller ::= {compxVel :=*;compyVel:=*;compzVel:=*;?compx+compxVel*period-xMax<=0;?-compx-compxVel*period-xMin<=0;?compy+compyVel*period-yMax<=0;?-compy-compyVel*period-yMin<=0;?compz+compzVel*period-zMax<=0;?-compz-compzVel*period-zMin<=0;};
+End.
+
+ProgramVariables
+    Real xVel;
+    Real compxVel;
+    Real x;
+    Real compx;
+    
+    Real yVel;
+    Real compyVel;
+    Real y;
+    Real compy;
+    
+    Real zVel;
+    Real compzVel;
+    Real z;
+    Real compz;
+    
+    Real t;
+End.
+
+Problem
+  (period>0 & xMax>0 & xMin<0 & yMax>0 & yMin<0 & zMax>0 & zMin<0 & x<=xMax & x>=xMin & y<=yMax & y>=yMin & z<=zMax & z>=zMin)->
+    [{sen;controller;act;flight;}*](x<=xMax & x>=xMin & y<=yMax & y>=yMin & z<=zMax & z>=zMin)
+End.
+
+Tactic
+
+unfold;
+loop("x<=xMax()&x>=xMin()&y<=yMax()&y>=yMin()&z<=zMax()&z>=zMin()", 'R=="[{sen{|^@|};controller{|^@|};act{|^@|};flight{|^@|};}*](x<=xMax()&x>=xMin()&y<=yMax()&y>=yMin()&z<=zMax()&z>=zMin())"); <(
+  "Init":
+    auto,
+  "Post":
+    auto,
+  "Step":
+    expandAllDefs();
+    unfold;
+    dC("x<=xMax()&x>=xMin()", 'R=="[{x'=compxVel,y'=compyVel,z'=compzVel,t'=1&t<=period()}](x<=xMax()&x>=xMin()&y<=yMax()&y>=yMin()&z<=zMax()&z>=zMin())"); <(
+      "Use":
+        dC("y<=yMax()&y>=yMin()", 'R=="[{x'=compxVel,y'=compyVel,z'=compzVel,t'=1&t<=period()&x<=xMax()&x>=xMin()}](x<=xMax()&x>=xMin()&y<=yMax()&y>=yMin()&z<=zMax()&z>=zMin())"); <(
+          "Use":
+            dC("z<=zMax()&z>=zMin()", 'R=="[{x'=compxVel,y'=compyVel,z'=compzVel,t'=1&(t<=period()&x<=xMax()&x>=xMin())&y<=yMax()&y>=yMin()}](x<=xMax()&x>=xMin()&y<=yMax()&y>=yMin()&z<=zMax()&z>=zMin())"); <(
+              "Use":
+                dW('R=="[{x'=compxVel,y'=compyVel,z'=compzVel,t'=1&((t<=period()&x<=xMax()&x>=xMin())&y<=yMax()&y>=yMin())&z<=zMax()&z>=zMin()}](x<=xMax()&x>=xMin()&y<=yMax()&y>=yMin()&z<=zMax()&z>=zMin())");
+                auto,
+              "Show":
+                auto using "period()>0 :: xMax()>0 :: xMin() < 0 :: yMax()>0 :: yMin() < 0 :: zMax()>0 :: zMin() < 0 :: z+compzVel*period()-zMax()<=0 :: -z-compzVel*period()-zMin()<=0 :: t=0 :: x<=xMax() :: x>=xMin() :: y<=yMax() :: y>=yMin() :: z<=zMax() :: z>=zMin() :: [{x'=compxVel,y'=compyVel,z'=compzVel,t'=1&(t<=period()&x<=xMax()&x>=xMin())&y<=yMax()&y>=yMin()}](z<=zMax()&z>=zMin()) :: nil"
+            ),
+          "Show":
+            auto using "period()>0 :: xMax()>0 :: xMin() < 0 :: yMax()>0 :: yMin() < 0 :: zMax()>0 :: zMin() < 0 :: y+compyVel*period()-yMax()<=0 :: -y-compyVel*period()-yMin()<=0 :: t=0 :: x<=xMax() :: x>=xMin() :: y<=yMax() :: y>=yMin() :: z<=zMax() :: z>=zMin() :: [{x'=compxVel,y'=compyVel,z'=compzVel,t'=1&t<=period()&x<=xMax()&x>=xMin()}](y<=yMax()&y>=yMin()) :: nil"
+        ),
+      "Show":
+        auto using "period()>0 :: xMax()>0 :: xMin() < 0 :: yMax()>0 :: yMin() < 0 :: zMax()>0 :: zMin() < 0 :: x+compxVel*period()-xMax()<=0 :: -x-compxVel*period()-xMin()<=0 :: t=0 :: x<=xMax() :: x>=xMin() :: y<=yMax() :: y>=yMin() :: z<=zMax() :: z>=zMin() :: [{x'=compxVel,y'=compyVel,z'=compzVel,t'=1&t<=period()}](x<=xMax()&x>=xMin()) :: nil"
+    )
+)
+End.
+End.
+/* End printed tactics */
