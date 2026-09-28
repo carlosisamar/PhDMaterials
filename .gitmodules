@@ -25,3 +25,6 @@
 [submodule "libraries/UTP"]
 	path = libraries/UTP
 	url = https://github.com/isabelle-utp/UTP.git
+[submodule "libraries/Circus_Toolkit"]
+	path = libraries/Circus_Toolkit
+	url = https://github.com/isabelle-utp/Circus_Toolkit.git
