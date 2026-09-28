@@ -1,5 +1,5 @@
 theory Scene_spaces_extra
-  imports "Optics.Optics" "HOL-Algebra.Complete_Lattice" "Explorer.Explorer" "Scenes_extra"
+  imports "Optics.Optics" "HOL-Algebra.Complete_Lattice"  "Scenes_extra"
 begin
 
 (* Add this to Optics *)

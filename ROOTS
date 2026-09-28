@@ -3,4 +3,12 @@ dlchpShallowEmbedding
 libraries/Hybrid-Verification
 libraries/Hybrid-Library
 libraries/Shallow-Expressions
+libraries/Shallow-Expressions/Z
 libraries/AFP
+libraries/CAS-Integration
+libraries/Z_Toolkit
+libraries/UTP-Reactive
+libraries/UTP-Designs
+libraries/UTP
+libraries/Circus_Toolkit
+libraries/Abstract_Prog_Syntax

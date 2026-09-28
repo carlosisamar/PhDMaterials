@@ -2176,7 +2176,7 @@ proof -
         assume nwait_end:"\<not>wait<s'>"
 
         have "s' =(put\<^bsub>st\<^esub> s (put\<^bsub>x\<^esub> (st<s>) ((e)\<^sub>e (st<s>))))"
-          using is_run nwait_end nwait unfolding assign_dlchp_def
+          using is_run nwait_end assms unfolding assign_dlchp_def
           by(pred_auto)
 
         hence " F s'"

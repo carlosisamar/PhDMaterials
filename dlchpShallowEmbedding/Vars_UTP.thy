@@ -382,7 +382,6 @@ lemma nmods_then_BV:
   using assms
   apply (simp add: BV_progs_def pred)
   apply (meson Scenes_extra.scene_equiv_get_eq)
-  apply (metis assms(2) nmods_iff var_alpha_def)
   done
 
 lemma nBV_iff_nmods:
@@ -391,10 +390,6 @@ lemma nBV_iff_nmods:
   using assms
   apply (simp add: BV_progs_def pred)
   apply (meson Scenes_extra.scene_equiv_get_eq)
-  apply (smt (verit) Scenes_extra.scene_equiv_get_eq cond_case_prod_eta lens_override_def
-      lens_override_idem)
-  apply (metis (mono_tags, lifting) case_prod_conv lens_scene_override scene_equiv_def
-      vwb_lens_def)
   done
 
 
