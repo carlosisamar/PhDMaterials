@@ -4,3 +4,6 @@
 [submodule "libraries/Hybrid-Verification"]
 	path = libraries/Hybrid-Verification
 	url = https://github.com/isabelle-utp/Hybrid-Verification.git
+[submodule "libraries/Hybrid-Library"]
+	path = libraries/Hybrid-Library
+	url = https://github.com/isabelle-utp/Hybrid-Library.git
