@@ -1,0 +1,3 @@
+[submodule "libraries/Optics"]
+	path = libraries/Optics
+	url = https://github.com/isabelle-utp/Optics.git
