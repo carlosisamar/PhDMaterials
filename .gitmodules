@@ -22,3 +22,6 @@
 [submodule "libraries/UTP-Designs"]
 	path = libraries/UTP-Designs
 	url = https://github.com/isabelle-utp/UTP-Designs.git
+[submodule "libraries/UTP"]
+	path = libraries/UTP
+	url = https://github.com/isabelle-utp/UTP.git
