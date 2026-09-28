@@ -10,3 +10,6 @@
 [submodule "libraries/Shallow-Expressions"]
 	path = libraries/Shallow-Expressions
 	url = https://github.com/isabelle-utp/Shallow-Expressions.git
+[submodule "libraries/CAS-Integration"]
+	path = libraries/CAS-Integration
+	url = https://github.com/isabelle-utp/CAS-Integration.git
