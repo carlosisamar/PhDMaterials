@@ -19,3 +19,6 @@
 [submodule "libraries/UTP-Reactive"]
 	path = libraries/UTP-Reactive
 	url = https://github.com/isabelle-utp/UTP-Reactive.git
+[submodule "libraries/UTP-Designs"]
+	path = libraries/UTP-Designs
+	url = https://github.com/isabelle-utp/UTP-Designs.git
