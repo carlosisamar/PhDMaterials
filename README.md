@@ -1,4 +1,4 @@
-#PhD Materials
+# PhD Materials
 
 This repository contains the reproducibility package of my PhD. thesis.
 
