@@ -18,7 +18,7 @@ The contents of that folder are as follows:
 | &nbsp;&nbsp;&nbsp;&nbsp;`DockerBuild/build.sh`  | Script to create the Docker image to run the proof.                  |
 | &nbsp;&nbsp;&nbsp;&nbsp;`DockerBuild/Drone_Example_Proof.kyx` | File containing the model and proof tactic of the Drone without noise to be verified.           |
 | &nbsp;&nbsp;&nbsp;&nbsp;`DockerBuild/Drone_Noisy_Example_Proof.kyx` | File containing the model and proof tactic of the drone with noise to be verified.           |
-| &nbsp;&nbsp;&nbsp;&nbsp;/Other files             | Files needed to create the docker image.                                        |
+| &nbsp;&nbsp;&nbsp;&nbsp;`DockerBuild`/Other files             | Files needed to create the docker image.                                        |
 | `setup.sh`                                      | Script to mount the image and activate the Wolfram license.          |
 | `check_proof.sh`                                | Script to check all the proofs using KeYmaera X.                     |
 
