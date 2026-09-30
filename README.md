@@ -53,6 +53,6 @@ To inspect and run the Isabelle files, download [Isabelle2025](https://isabelle.
 ```
 PATH/isabelle jedit -d . -l dlCHP_Toolkit
 ```
-Usually `PATH` is in the directory `INSTALLATION_PATH/Isabelle2025/bin/isabel`
+Usually `PATH` is in the directory `INSTALLATION_PATH/Isabelle2025/bin/`
 
 Note: `Isabelle2025-1` and `Isabelle2025-2` will not work due to dependency changes affecting AFP libraries.
