@@ -25,7 +25,7 @@ The contents of that folder are as follows:
 
 ### Setup and Checking the Proofs
 
-In order to run the scripts, Docker needs to be installed on your machine and working correctly, see [docs.docker.com/get-docker/](https://docs.docker.com/get-docker/). KeYmaera X requires Wolfram Engine for QE. The Wolfram Engine license can be obtained for free and you will be prompted during the setup to login with your account. We present two options to check the correctness of our proof.
+In order to run the scripts, Docker needs to be installed on your machine and working correctly, see [docs.docker.com/get-docker/](https://docs.docker.com/get-docker/). KeYmaera X requires Wolfram Engine for QE. The Wolfram Engine license can be obtained for free and you will be prompted during the setup to login with your account. Here are the instructions to check the correctness of our proof.
 
 
 1. Go to the folder `Proof/DockerBuild/` and run `./build.sh`. This script creates the docker image `keymaerax.tar.gz` and a container called `kyx` with all necessary components to run KeYmaera X and check the proof.
